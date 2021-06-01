@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2021 at 01:12 PM
+-- Generation Time: Jun 01, 2021 at 01:42 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.16
 
@@ -48,7 +48,7 @@ CREATE TABLE `admins` (
 INSERT INTO `admins` (`id`, `name`, `email`, `email_verified_at`, `password`, `phone`, `status`, `avatar`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'adsmo', 'hppvtien@gmail.com', NULL, '$2y$10$rayJ/U4/vyAJn0dhPnehH..GNtioVtH7he0BKJHWsCkMGAqMY229S', '0986420994', 1, NULL, NULL, NULL, NULL),
 (2, 'văn nhiệm', 'nguyennadadahiemmc2k@gmail.com', NULL, '$2y$10$bWpjLt6T8y7pnBqutWSG3eSkItFK6AAOlFQXnzMShCUUmvpd3/XKG', '0766592222', 0, NULL, NULL, '2020-11-04 12:53:51', '2020-11-04 12:53:51'),
-(3, 'Dược NV', 'duocnv@gmail.com', NULL, '$2y$10$LebL4i/wX.mYZqLQQkbejOVdNSDL1hZyvF7aBk3lL0saZr12qYwTO', '0988111222', 1, NULL, NULL, '2020-12-27 02:21:36', '2020-12-27 02:21:36');
+(3, 'Dược NV', 'duocnv@gmail.com', NULL, '$2y$10$rayJ/U4/vyAJn0dhPnehH..GNtioVtH7he0BKJHWsCkMGAqMY229S', '0988111222', 1, NULL, NULL, '2020-12-27 02:21:36', '2020-12-27 02:21:36');
 
 -- --------------------------------------------------------
 
@@ -94,18 +94,29 @@ CREATE TABLE `answer_to_teacher` (
   `asw_id_user` int(11) DEFAULT NULL,
   `asw_status` tinyint(4) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `asw_parent` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `answer_to_teacher`
 --
 
-INSERT INTO `answer_to_teacher` (`id`, `asw_teacher`, `asw_content`, `asw_image`, `asw_id_course`, `asw_id_user`, `asw_status`, `created_at`, `updated_at`) VALUES
-(1, 2, NULL, 'brvn3-1622193378.jpg', '29', 34, 0, '2021-05-28 02:16:18', '2021-05-28 03:56:16'),
-(2, 2, NULL, 'brvn3-1622193388.jpg', '29', 34, 0, '2021-05-28 02:16:28', NULL),
-(3, 2, NULL, 'hinh-anh-dep-1-1622193429.jpg', '29', 34, 0, '2021-05-28 02:17:09', NULL),
-(4, 2, 'ádasdasdasdasda', 'hinh-anh-dep-4-1622193572.jpg', '29', 34, 1, '2021-05-28 02:19:32', NULL);
+INSERT INTO `answer_to_teacher` (`id`, `asw_teacher`, `asw_content`, `asw_image`, `asw_id_course`, `asw_id_user`, `asw_status`, `created_at`, `updated_at`, `asw_parent`) VALUES
+(1, 4, 'cau hoi 1', NULL, '29', 34, 1, '2021-05-31 01:43:17', '2021-05-31 02:10:49', NULL),
+(2, 4, 'cau hoi 1.1', NULL, '29', 34, 1, '2021-05-31 01:44:15', '2021-05-31 02:11:09', NULL),
+(3, 4, 'cau hoi 2.1', NULL, '29', 34, 1, '2021-05-31 01:49:50', '2021-05-31 02:06:30', 1),
+(4, 4, 'cau hoi 5.1', NULL, '29', 34, 1, '2021-05-31 01:52:27', '2021-05-31 01:53:57', 2),
+(5, 4, 'cau hoi 3.1', NULL, '29', 34, 1, '2021-05-31 02:11:54', '2021-05-31 02:12:14', 1),
+(6, 4, 'cau hoi 4.1', NULL, '29', 34, 1, '2021-05-31 02:11:54', '2021-05-31 02:12:14', 2),
+(8, 4, 'ádasdasdasdasdsad', NULL, '29', 34, 1, '2021-06-01 01:44:40', NULL, 2),
+(9, 4, 'cau 22222', NULL, '29', 34, 1, '2021-06-01 01:51:11', NULL, 1),
+(10, 4, 'Giao vien check 22222222', NULL, '29', 34, 0, '2021-06-01 03:13:48', NULL, 1),
+(11, 4, 'Chung tooii dang can biet', NULL, '29', 34, 0, '2021-06-01 03:42:32', NULL, NULL),
+(12, 4, 'lâu thê', NULL, '29', 34, 0, '2021-06-01 03:43:37', NULL, 11),
+(13, 4, 'qua lâu luôn', NULL, '29', 34, 0, '2021-06-01 03:43:53', NULL, 11),
+(14, 4, 'lâu vcl', NULL, '29', 34, 0, '2021-06-01 03:48:26', NULL, 1),
+(15, 4, 'cau hoi thu 4', NULL, '29', 34, 0, '2021-06-01 03:50:27', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -213,7 +224,9 @@ INSERT INTO `bill` (`id`, `method_invoice`, `method_course`, `method_pay`, `paid
 (11, '#003197', 'Leadership Communication', 'Chuyển khoản', '5000000', 'hppvtien@gmail.com', 'Pham van tien', 'Hà Nội, Hải Phòng', '5.000.000 đ', '1', '2021-05-26 21:42:13', NULL, 'Code2343423423', 'Công ty TNHH ABC', '4545454.55', '454545.45', '{\"id\":1,\"logo\":\"logo-1621497786.png\",\"name\":\"Tien Van Pham\",\"address\":\"Ha noi\",\"tax_id\":34343434,\"email\":\"tlead01@gmail.com\",\"hotline\":\"03561054882\",\"hotline_rp\":545454545,\"footer_bottom\":\"B\\u1ea3n quy\\u1ec1n \\u00a9 2021 UNIMIND. \\u0110\\u00e3 \\u0111\\u0103ng k\\u00fd b\\u1ea3n quy\\u1ec1n.\",\"facebook\":\"11111111\",\"youtube\":\"22222222222222\",\"twitter\":\"22222222222222\",\"instagram\":\"22222222222222\",\"created_at\":\"2020-11-21T16:11:08.000000Z\",\"updated_at\":\"2021-05-25T03:37:20.000000Z\"}'),
 (12, '#001525', 'Strategic Sales Management', 'Chuyển khoản', '4000000', 'hppvtien@gmail.com', 'ứadasd', 'ádasdasd', '4.000.000 đ', '0', '2021-05-26 23:05:51', NULL, NULL, NULL, '3636363.64', '363636.36', '{\"id\":1,\"logo\":\"logo-1621497786.png\",\"name\":\"Tien Van Pham\",\"address\":\"Ha noi\",\"tax_id\":34343434,\"email\":\"tlead01@gmail.com\",\"hotline\":\"03561054882\",\"hotline_rp\":545454545,\"footer_bottom\":\"B\\u1ea3n quy\\u1ec1n \\u00a9 2021 UNIMIND. \\u0110\\u00e3 \\u0111\\u0103ng k\\u00fd b\\u1ea3n quy\\u1ec1n.\",\"facebook\":\"11111111\",\"youtube\":\"22222222222222\",\"twitter\":\"22222222222222\",\"instagram\":\"22222222222222\",\"created_at\":\"2020-11-21T16:11:08.000000Z\",\"updated_at\":\"2021-05-25T03:37:20.000000Z\"}'),
 (13, '#001149', 'Strategic Sales Management', 'Chuyển khoản', '4000000', 'hppvtien@gmail.com', 'Pham van tien', 'Hai Phong', '4.000.000 đ', '0', '2021-05-26 23:07:56', NULL, NULL, NULL, '3636363.64', '363636.36', '{\"id\":1,\"logo\":\"logo-1621497786.png\",\"name\":\"Tien Van Pham\",\"address\":\"Ha noi\",\"tax_id\":34343434,\"email\":\"tlead01@gmail.com\",\"hotline\":\"03561054882\",\"hotline_rp\":545454545,\"footer_bottom\":\"B\\u1ea3n quy\\u1ec1n \\u00a9 2021 UNIMIND. \\u0110\\u00e3 \\u0111\\u0103ng k\\u00fd b\\u1ea3n quy\\u1ec1n.\",\"facebook\":\"11111111\",\"youtube\":\"22222222222222\",\"twitter\":\"22222222222222\",\"instagram\":\"22222222222222\",\"created_at\":\"2020-11-21T16:11:08.000000Z\",\"updated_at\":\"2021-05-25T03:37:20.000000Z\"}'),
-(14, '#006455', 'Strategic Sales Management', 'Chuyển khoản', '4000000', 'hppvtien@gmail.com', 'Pham van tien', 'Hai Phong', '4.000.000 đ', '0', '2021-05-26 23:08:57', NULL, NULL, NULL, '3636363.64', '363636.36', '{\"id\":1,\"logo\":\"logo-1621497786.png\",\"name\":\"Tien Van Pham\",\"address\":\"Ha noi\",\"tax_id\":34343434,\"email\":\"tlead01@gmail.com\",\"hotline\":\"03561054882\",\"hotline_rp\":545454545,\"footer_bottom\":\"B\\u1ea3n quy\\u1ec1n \\u00a9 2021 UNIMIND. \\u0110\\u00e3 \\u0111\\u0103ng k\\u00fd b\\u1ea3n quy\\u1ec1n.\",\"facebook\":\"11111111\",\"youtube\":\"22222222222222\",\"twitter\":\"22222222222222\",\"instagram\":\"22222222222222\",\"created_at\":\"2020-11-21T16:11:08.000000Z\",\"updated_at\":\"2021-05-25T03:37:20.000000Z\"}');
+(14, '#006455', 'Strategic Sales Management', 'Chuyển khoản', '4000000', 'hppvtien@gmail.com', 'Pham van tien', 'Hai Phong', '4.000.000 đ', '0', '2021-05-26 23:08:57', NULL, NULL, NULL, '3636363.64', '363636.36', '{\"id\":1,\"logo\":\"logo-1621497786.png\",\"name\":\"Tien Van Pham\",\"address\":\"Ha noi\",\"tax_id\":34343434,\"email\":\"tlead01@gmail.com\",\"hotline\":\"03561054882\",\"hotline_rp\":545454545,\"footer_bottom\":\"B\\u1ea3n quy\\u1ec1n \\u00a9 2021 UNIMIND. \\u0110\\u00e3 \\u0111\\u0103ng k\\u00fd b\\u1ea3n quy\\u1ec1n.\",\"facebook\":\"11111111\",\"youtube\":\"22222222222222\",\"twitter\":\"22222222222222\",\"instagram\":\"22222222222222\",\"created_at\":\"2020-11-21T16:11:08.000000Z\",\"updated_at\":\"2021-05-25T03:37:20.000000Z\"}'),
+(15, '#002770', 'Viral Marketing', 'Chuyển khoản', '3000000', 'hppvtien@gmail.com', 'Pham van tien', 'Hà Nội, Hải Phòng', '3.000.000 đ', '0', '2021-05-31 20:37:16', NULL, NULL, NULL, '2727272.73', '272727.27', '{\"id\":1,\"logo\":\"logo-1621497786.png\",\"name\":\"Tien Van Pham\",\"address\":\"Ha noi\",\"tax_id\":34343434,\"email\":\"tlead01@gmail.com\",\"hotline\":\"03561054882\",\"hotline_rp\":545454545,\"footer_bottom\":\"B\\u1ea3n quy\\u1ec1n \\u00a9 2021 UNIMIND. \\u0110\\u00e3 \\u0111\\u0103ng k\\u00fd b\\u1ea3n quy\\u1ec1n.\",\"facebook\":\"11111111\",\"youtube\":\"22222222222222\",\"twitter\":\"22222222222222\",\"instagram\":\"22222222222222\",\"created_at\":\"2020-11-21T16:11:08.000000Z\",\"updated_at\":\"2021-05-25T03:37:20.000000Z\"}'),
+(16, '#009258', 'Strategic Sales Management', 'Chuyển khoản', '4000000', 'hppvtien@gmail.com', 'Pham van tien', 'Hà Nội, Hải Phòng', '4.000.000 đ', '0', '2021-06-01 01:29:02', NULL, NULL, NULL, '3636363.64', '363636.36', '{\"id\":1,\"logo\":\"logo-1621497786.png\",\"name\":\"Tien Van Pham\",\"address\":\"Ha noi\",\"tax_id\":34343434,\"email\":\"tlead01@gmail.com\",\"hotline\":\"03561054882\",\"hotline_rp\":545454545,\"footer_bottom\":\"B\\u1ea3n quy\\u1ec1n \\u00a9 2021 UNIMIND. \\u0110\\u00e3 \\u0111\\u0103ng k\\u00fd b\\u1ea3n quy\\u1ec1n.\",\"facebook\":\"11111111\",\"youtube\":\"22222222222222\",\"twitter\":\"22222222222222\",\"instagram\":\"22222222222222\",\"created_at\":\"2020-11-21T16:11:08.000000Z\",\"updated_at\":\"2021-05-25T03:37:20.000000Z\"}');
 
 -- --------------------------------------------------------
 
@@ -915,7 +928,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (55, '2021_05_26_032948_alter_bill_table', 22),
 (56, '2021_05_28_022956_create_answer_to_teacher_table', 23),
 (57, '2021_05_28_023534_create_questions_from_teacher_table', 23),
-(58, '2021_05_28_092826_create_questions_from_teacher_table', 24);
+(58, '2021_05_28_092826_create_questions_from_teacher_table', 24),
+(59, '2021_05_31_021928_alter_asw_parent_answer_to_teacher', 25);
 
 -- --------------------------------------------------------
 
@@ -1019,7 +1033,11 @@ INSERT INTO `orders` (`id`, `o_transaction_id`, `o_action_id`, `o_user_id`, `o_s
 (44, 100, 30, 34, 0, 4000000, 1, 0, NULL, NULL),
 (45, 101, 30, 34, 0, 4000000, 1, 0, NULL, NULL),
 (46, 102, 30, 34, 0, 4000000, 1, 0, NULL, NULL),
-(47, 103, 5, 34, 0, 4000000, 3, 0, NULL, NULL);
+(47, 103, 5, 34, 0, 4000000, 3, 0, NULL, NULL),
+(48, 104, 19, 34, 0, 3000000, 1, 0, NULL, NULL),
+(49, 105, 19, 34, 0, 3000000, 1, 0, NULL, NULL),
+(50, 106, 19, 34, 0, 3000000, 1, 0, NULL, NULL),
+(51, 107, 30, 34, 0, 4000000, 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1152,9 +1170,13 @@ CREATE TABLE `questions_from_teacher` (
 --
 
 INSERT INTO `questions_from_teacher` (`id`, `qs_answerID`, `qs_content`, `created_at`, `updated_at`) VALUES
-(1, 4, 'Ngon nhu co giao', '2021-05-28 03:50:45', NULL),
-(2, 4, 'Ngon nhu co giao', '2021-05-28 03:51:20', NULL),
-(3, 1, 'asdasdasd', '2021-05-28 03:56:16', NULL);
+(1, 1, 'tra loi 1', '2021-05-31 01:43:53', '2021-05-31 02:10:49'),
+(2, 2, 'tra loi 1.1', '2021-05-31 01:53:57', NULL),
+(3, 3, 'tra loi 2.1', '2021-05-31 02:03:27', '2021-05-31 02:11:09'),
+(4, 4, 'tra loi 3.1', '2021-05-31 02:06:30', NULL),
+(5, 5, 'tra loi 4.1', '2021-05-31 02:12:14', NULL),
+(6, 6, 'tra loi 5.1', '2021-05-31 02:12:14', NULL),
+(8, 9, 'tra loi 52.1', '2021-05-31 02:12:14', NULL);
 
 -- --------------------------------------------------------
 
@@ -1419,9 +1441,9 @@ CREATE TABLE `teachers` (
 
 INSERT INTO `teachers` (`id`, `t_name`, `email`, `password`, `t_slug`, `t_avatar`, `t_job`, `t_phone`, `t_email`, `t_description`, `t_content`, `t_count_course`, `t_question`, `created_at`, `updated_at`) VALUES
 (1, 'Nguyễn Thu Thảo', NULL, NULL, 'nguyen-thu-thao', NULL, 'Chuyên viên Marketing', '0979324123', 'phamthuthao@gmail.com', NULL, '<p>Chuy&ecirc;n vi&ecirc;n Marketing Online</p>', 0, 0, '2021-05-04 21:57:46', '2021-05-13 20:28:33'),
-(2, 'Phạm Văn Tiến', NULL, NULL, 'pham-van-tien', NULL, 'Giảng viên Web Developer', '0978912354', 'phamvantien@gmail.com', NULL, '<p>Giảng vi&ecirc;n Web Developer</p>', 0, 0, '2021-05-04 21:58:53', NULL),
+(2, 'Teacher Tien', 'hppvtien@gmail.com', '$2y$10$TSAZhOcoEvyfb/GG1T5ya.24MguuRjpgO2pT0nbHndgbeXCEIxgFG', 'pham-van-tien', NULL, 'Giảng viên Web Developer', '0978912354', 'phamvantien@gmail.com', NULL, '<p>Giảng vi&ecirc;n Web Developer</p>', 0, 0, '2021-05-04 21:58:53', NULL),
 (3, 'Lê Minh Thùy', NULL, NULL, 'le-minh-thuy', NULL, 'Giảng viên Design', '0989345423', 'leminhthuy@gmail.com', NULL, '<p>Giảng vi&ecirc;n Design</p>', 0, 0, '2021-05-04 22:00:07', NULL),
-(4, 'Bùi Tuấn Anh', NULL, NULL, 'bui-tuan-anh', NULL, 'Giảng viên Digital Marketing', '0958934523', 'buituananh@gmail.com', NULL, '<p style=\"text-align:center\">Giảng vi&ecirc;n Digital Marketing</p>\r\n\r\n<p style=\"text-align:center\">&nbsp;</p>', 0, 0, '2021-05-04 22:01:33', '2021-05-06 02:33:07'),
+(4, 'Bùi Tuấn Anh', 'pvtien@gmail.com', '$2y$10$TSAZhOcoEvyfb/GG1T5ya.24MguuRjpgO2pT0nbHndgbeXCEIxgFG', 'bui-tuan-anh', NULL, 'Giảng viên Digital Marketing', '0958934523', 'buituananh@gmail.com', NULL, '<p style=\"text-align:center\">Giảng vi&ecirc;n Digital Marketing</p>\r\n\r\n<p style=\"text-align:center\">&nbsp;</p>', 0, 0, '2021-05-04 22:01:33', '2021-05-06 02:33:07'),
 (5, 'Vũ Mạnh Điều', NULL, NULL, 'vu-manh-dieu', 'hinh-anh-dep-1-1621499630.jpg', 'Marketing Online', '0356105388', 'adtlead@gmail.com', NULL, '<p>Marketing Online</p>', 0, 0, '2021-05-13 20:23:01', '2021-05-20 01:33:53');
 
 -- --------------------------------------------------------
@@ -1583,7 +1605,11 @@ INSERT INTO `transactions` (`id`, `t_user_id`, `t_admin_id`, `t_total_money`, `t
 (100, 34, 0, 4000000, NULL, NULL, NULL, 1, 1, NULL, '2021-05-26 23:05:43', NULL),
 (101, 34, 0, 4000000, NULL, NULL, NULL, 1, 1, NULL, '2021-05-26 23:07:49', NULL),
 (102, 34, 0, 4000000, NULL, NULL, NULL, 1, 1, NULL, '2021-05-26 23:08:49', NULL),
-(103, 34, 0, 4000000, NULL, NULL, NULL, 1, 3, NULL, '2021-05-26 23:41:11', '2021-05-27 01:04:45');
+(103, 34, 0, 4000000, NULL, NULL, NULL, 1, 3, NULL, '2021-05-26 23:41:11', '2021-05-27 01:04:45'),
+(104, 34, 0, 3000000, NULL, NULL, NULL, 1, 1, NULL, '2021-05-31 20:10:33', NULL),
+(105, 34, 0, 3000000, NULL, NULL, NULL, 1, 1, NULL, '2021-05-31 20:31:42', NULL),
+(106, 34, 0, 3000000, NULL, NULL, NULL, 1, 1, NULL, '2021-05-31 20:36:53', NULL),
+(107, 34, 0, 4000000, NULL, NULL, NULL, 1, 1, NULL, '2021-06-01 01:28:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -2014,7 +2040,7 @@ ALTER TABLE `answers`
 -- AUTO_INCREMENT for table `answer_to_teacher`
 --
 ALTER TABLE `answer_to_teacher`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `articles`
@@ -2032,7 +2058,7 @@ ALTER TABLE `articles_keywords`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -2152,13 +2178,13 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -2182,7 +2208,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `questions_from_teacher`
 --
 ALTER TABLE `questions_from_teacher`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -2230,7 +2256,7 @@ ALTER TABLE `teachers_tags`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT for table `users`
